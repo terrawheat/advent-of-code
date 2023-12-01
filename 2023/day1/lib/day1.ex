@@ -42,12 +42,13 @@ defmodule Day1 do
   def translate("eight") do "8" end
   def translate("nine") do "9" end
   def translate(digit) do digit end
-end
 
-Day1.get_data
-  |> Day1.select_pairs
-  |> Day1.translate_pairs
-  |> Enum.map(fn pair -> Enum.join(pair, "") end)
-  |> Enum.map(&Day1.to_number/1)
-  |> Enum.sum
-  |> IO.inspect
+  def run do
+    Day1.get_data
+    |> Day1.select_pairs
+    |> Day1.translate_pairs
+    |> Enum.map(fn pair -> Enum.join(pair, "") end)
+    |> Enum.map(&Day1.to_number/1)
+    |> Enum.sum
+  end
+end
