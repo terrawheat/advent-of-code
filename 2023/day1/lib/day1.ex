@@ -1,4 +1,8 @@
 defmodule Day1 do
+  @moduledoc """
+  This module defines the code for Day 1 of Advent of Code 2023
+  """
+
   def get_data() do
     {:ok, contents} = File.read("./source.txt")
     contents
@@ -13,7 +17,7 @@ defmodule Day1 do
     matches = Regex.scan(~r/(?=(one|two|three|four|five|six|seven|eight|nine|\d{1}))/, input_string)
     |> Enum.map(fn [_, m] -> m end)
 
-    [ matches |> Enum.at(0), matches |> Enum.at(-1) ] |> detect_singular
+    [matches |> Enum.at(0), matches |> Enum.at(-1)] |> detect_singular
   end
 
   def select_pairs(input_list) do
