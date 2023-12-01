@@ -3,8 +3,12 @@ defmodule Day1 do
   This module defines the code for Day 1 of Advent of Code 2023
   """
 
+  defp file_module do
+    Application.get_env(:day1, :file_module)
+  end
+
   def get_data() do
-    {:ok, contents} = File.read("./source.txt")
+    {:ok, contents} = file_module().read("./source.txt")
 
     contents
     |> String.split(~r/\R/)

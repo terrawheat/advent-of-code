@@ -21,7 +21,10 @@ defmodule Day1.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:credo, "~>1.7", only: [:dev, :test], runtime: false}
+      {:credo, "~>1.7", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:mock, "~> 0.3.0", only: :test},
+      {:tapex, "~> 0.1.0", only: :test},
     ]
   end
 end
