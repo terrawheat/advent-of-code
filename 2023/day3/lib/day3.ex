@@ -15,13 +15,13 @@ defmodule Day3 do
     {prev_line, _} = Enum.at(data, line - 1)
     {current_line, _} = Enum.at(data, line)
 
-    matches = for i <- char_index..(char_index + length) do
+    matches = for i <- char_index..(char_index + (length - 1)) do
       [
         [String.at(prev_line, i - 1), String.at(prev_line, i), String.at(prev_line, i + 1)],
         [String.at(current_line, i - 1), String.at(current_line, i), String.at(current_line, i + 1)],
       ]
       |> List.flatten()
-      |> Enum.any?(&(Regex.match?(symbol_detector, &1 || "")))
+      |> Enum.any?(&(Regex.match?(symbol_detector, &1 || ".")))
     end
 
     Enum.any?(matches)
@@ -32,13 +32,13 @@ defmodule Day3 do
     {current_line, _} = Enum.at(data, 0)
     {next_line, _} = Enum.at(data, 1)
 
-    matches = for i <- char_index..(char_index + length) do
+    matches = for i <- char_index..(char_index + (length - 1)) do
       [
         [String.at(current_line, i - 1), String.at(current_line, i), String.at(current_line, i + 1)],
         [String.at(next_line, i - 1), String.at(next_line, i), String.at(next_line, i + 1)]
       ]
       |> List.flatten()
-      |> Enum.any?(&(Regex.match?(symbol_detector, &1)))
+      |> Enum.any?(&(Regex.match?(symbol_detector, &1 || ".")))
     end
 
     Enum.any?(matches)
@@ -49,7 +49,7 @@ defmodule Day3 do
       (length(data) - 1) == line ->
         is_valid_number?(data, %{line: line, char_index: char_index, length: length}, true)
       true ->
-        matches = for i <- char_index..(char_index + length) do
+        matches = for i <- char_index..(char_index + (length - 1)) do
           symbol_detector = ~r/[^\.\d]/
 
           {prev_line, _} = Enum.at(data, line - 1)
@@ -62,7 +62,7 @@ defmodule Day3 do
             [String.at(next_line, i - 1), String.at(next_line, i), String.at(next_line, i + 1)]
           ]
           |> List.flatten()
-          |> Enum.any?(&(Regex.match?(symbol_detector, &1 || "")))
+          |> Enum.any?(&(Regex.match?(symbol_detector, &1 || ".")))
         end
 
         Enum.any?(matches)
@@ -88,8 +88,6 @@ defmodule Day3 do
       |> Enum.map(&(String.to_integer(&1.number, 10)))
     end
     |> List.flatten()
-    |> Enum.sort()
-    |> Enum.uniq()
     |> Enum.sum()
     |> IO.inspect()
   end
