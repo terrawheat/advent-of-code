@@ -41,11 +41,11 @@ defmodule Day4 do
     |> Enum.reduce(Enum.to_list(1..198), fn [{id, _}, wins], cards ->
       freq = Enum.count(cards, &(&1 == id))
 
-      IO.puts "Frequency of #{id} is #{freq}"
-
       max_card = min(198, id + wins)
-      new_cards = for next_card <- id..max_card, wins != 0 do
-        for i <- 0..(freq) do
+
+      IO.puts "Current Card: #{id} -- # of cards: #{freq} -- # of wins: #{wins}"
+      new_cards = for next_card <- (id + 1)..max_card, wins != 0 do
+        for i <- 1..(freq) do
           next_card
         end
       end
